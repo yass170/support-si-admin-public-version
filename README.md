@@ -1,32 +1,109 @@
-# Support SI Admin — version publique
+# Support SI Admin — IT Documentation Portal
 
-Application d’administration et de support des systèmes d’information.
+A searchable support portal that brings technical documentation, operating guidance, tutorials and reusable prompts together for IT administrators.
 
-## Confidentialité et anonymisation
+Administrators can find an operating procedure, understand an application, follow a tutorial or locate a reusable prompt without navigating several disconnected documentation sources. Platform documentation stays connected to its maintained source files.
 
-Ce dépôt est une présentation publique de la structure du projet. **Tous les contenus d’origine des fichiers conservés ont été supprimés pour des raisons de confidentialité.** Les fichiers de code, de configuration, de migration SQL, de tests, de gouvernance et les artefacts d’ingénierie conservés contiennent uniquement la phrase « Contenu anonymisé ». Cette règle s’applique aussi aux exemples et aux modèles.
+## Users
 
-Les données, secrets, fichiers binaires, dépendances embarquées, résultats générés, wireframes, journaux et dossiers de documentation de work ont été exclus. Les dossiers `.agent` et `.agents`, les fichiers `AGENTS.md` et les métadonnées Git d’origine sont absents. Les noms susceptibles de révéler une entreprise, une personne, un client ou un système interne ont été remplacés par des noms génériques.
+| Role | Use |
+|---|---|
+| IT administrator | Search documentation, consult troubleshooting material and follow operating guidance. |
+| Documentation maintainer | Update source content and keep support resources organized. |
 
-Seuls ce README et les présentations d’architecture ont un contenu explicatif : ces textes ont été entièrement rédigés pour cette version publique, sans reprendre les détails internes. L’historique Git public commence avec cette version anonymisée.
+## Main features
 
-## Fonctionnement général
+- **Global search.** Find relevant sections across FAQ, platform documentation, tutorials and prompts.
+- **Technical and user documentation.** Navigate long-form content with section anchors and a table of contents.
+- **Runtime content synchronization.** Reflect changes to maintained documentation sources without duplicating their text manually.
+- **Agent guidance.** Consult organized guidance for AI-assisted project work.
+- **Tutorials.** Follow step-by-step guidance and open related reusable requests.
+- **Prompt library.** Browse categorized prompts, inspect a selected entry and copy its text.
 
-L’arborescence sépare les composants d’interface, les traitements applicatifs, les éléments de configuration et les tests lorsqu’ils sont présents. Le parcours général relie une interface à des traitements et à une couche de données. Les contrats, règles métier, schémas de données, intégrations et paramètres internes ne sont pas décrits.
+## Typical workflow
 
-Formats techniques représentés : Python, JavaScript, HTML, CSS, scripts shell, configuration textuelle.
+1. Search for a question or choose a documentation category.
+2. Open the relevant section or tutorial.
+3. Follow its navigation to related guidance or a reusable prompt.
+4. Return to the support portal as the underlying documentation evolves.
 
-La copie permet de parcourir l’organisation technique et d’identifier les familles de composants. **Elle ne permet ni d’exécuter ni de reconstruire le projet.** Les configurations et les migrations sont volontairement incomplètes et ne doivent pas être lancées.
+## Project structure
 
-## Organisation
+```text
+support-si-admin-public-version/
+├── backend/
+│   ├── app/
+│   │   ├── docs/
+│   │   ├── support_content/
+│   │   └── main.py
+│   ├── tests/
+│   ├── pyproject.toml
+│   ├── README.md
+│   └── requirements.txt
+├── deploy/
+│   ├── docker/
+│   ├── scripts/
+│   ├── systemd/
+│   └── README.md
+├── docs/
+│   ├── decisions/
+│   │   └── README.md
+│   ├── design/
+│   │   ├── decisions.md
+│   │   ├── requirements.md
+│   │   └── verification.md
+│   ├── issue/
+│   └── support-content/
+│       ├── module-001/
+│       ├── prompts/
+│       └── tutoriels/
+├── frontend/
+│   ├── scripts/
+│   ├── src/
+│   │   ├── api/
+│   │   ├── app/
+│   │   ├── components/
+│   │   ├── content/
+│   │   ├── hooks/
+│   │   ├── pages/
+│   │   ├── styles/
+│   │   ├── test/
+│   │   └── utils/
+│   ├── tests/
+│   ├── package.json
+│   └── README.md
+├── issues/
+│   ├── epics/
+│   ├── features/
+│   ├── tasks/
+│   └── README.md
+├── ARCHITECTURE.md
+└── README.md
+```
 
-- `.dockerignore`
-- `backend/`
-- `deploy/`
-- `docs/`
-- `frontend/`
-- `issues/`
+[Complete directory structure](docs/design/structure.md)
 
-Les noms `module-…` et `fichier-…` désignent des éléments renommés. Les extensions des fichiers textuels conservés indiquent leur format d’origine.
+| Area | Responsibility |
+|---|---|
+| Web interface | React, Mantine and Vite documentation navigation, search and prompt browsing. |
+| Content API | FastAPI loading and validation of runtime documentation and structured support content. |
+| Source documentation | Maintained Markdown files read from configured, read-only locations. |
+| Support catalogues | Versioned sections, tutorials and reusable prompt entries. |
+| Presentation layer | Markdown rendering, headings, anchors and accessible reading components. |
 
-Consulter [ARCHITECTURE.md](ARCHITECTURE.md) pour la présentation générale.
+## Technology
+
+React, JavaScript, Mantine, Vite, Python, FastAPI, Markdown and Docker.
+
+## Engineering
+
+- [Architecture](ARCHITECTURE.md)
+- [Product requirements](docs/design/requirements.md)
+- [Design decisions](docs/design/decisions.md)
+- [Verification strategy](docs/design/verification.md)
+
+The portal provides documentation and guidance; it does not execute remote administration commands.
+
+---
+
+Source code, operational configuration and project-specific data are withheld for confidentiality.
